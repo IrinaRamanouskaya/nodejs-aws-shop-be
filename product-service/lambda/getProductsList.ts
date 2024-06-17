@@ -12,10 +12,10 @@ export const handler = async () => {
         return {
             statusCode: 500,
             headers,
-            body: {
-                message: JSON.stringify('Server Error'),
+            body: JSON.stringify({
+                message: 'Server Error',
                 data: error,
-            },
+            }),
         }
     }
 }

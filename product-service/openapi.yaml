@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Products Service - OpenAPI 3.0
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://cvrhexhzel.execute-api.us-east-2.amazonaws.com/prod
+tags:
+  - name: Products Service
+    description: Products data
+paths:
+  /products:
+    get:
+      tags:
+        - products
+      summary: Get all products
+      description: Get list with all products
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    brand:
+                      type: string
+                    type:
+                      type: string
+                    price:
+                      type: number
+                    color:
+                      type: string
+                    isAvailable:
+                      type: boolean
+                    description:
+                      type: string
+        '500':
+          description: Server Error
+  /products/{productId}:
+    get:
+      tags:
+        - products
+      summary: Finds product by id
+      description: Finds product by id
+      operationId: findProductsById
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: Product Id that need to be considered for search product
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  brand:
+                    type: string
+                  type:
+                    type: string
+                  price:
+                    type: number
+                  color:
+                    type: string
+                  isAvailable:
+                    type: boolean
+                  description:
+                    type: string
+        '400':
+          description: Product id is required
+        '404':
+          description: Product with given id is not found.
+        '500':
+          description: Server Error

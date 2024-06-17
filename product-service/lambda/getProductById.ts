@@ -6,16 +6,6 @@ export const handler = async (event) => {
     const id = event?.pathParameters?.productId;
 
    try {
-       if (!id) {
-           return {
-               statusCode: 400,
-               headers,
-               body: {
-                   message: JSON.stringify('Product id is required'),
-               },
-           }
-       }
-
        const product = products.find(product => product.id === id);
 
        return product ? {
@@ -33,10 +23,10 @@ export const handler = async (event) => {
        return {
            statusCode: 500,
            headers,
-           body: {
-               message: JSON.stringify('Server Error'),
+           body: JSON.stringify({
+               message: 'Server Error',
                data: error,
-           },
+           }),
        }
    }
 }
